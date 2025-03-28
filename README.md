@@ -41,4 +41,9 @@ Generate (sample) some text from a trained model with:
 
     ./scripts/generate.sh
 
+**Note task 1**:
+We used Nathan the Wise as new dataset for training the model.
+We modified download_data.sh by changing the url, the names and the path of the files.
+First tried using Nathan The Wise and perplexity stayed high for the last 10+ epochs. Which means the hyperparamters were not optimal and or the text was not suitable for this kind of model training (i.e. too short). There might also have been some issues with formatting the text. To combat the potentiall limiation of the text length we tried Moby Dicks The Whale to bypass the shortness of Nathan The Wise. But even here we see that the perplexity has not significantly decreased in the last something epochs which lead us to blieve that it indeed is the hyperparameter setting which causes these issues. Both text produced gibberish text samples but we can clearly see that it has been trained on the specified text since we see words like "Whale" appearing which seem very specific to the text. 
+**Notes task 2**:
 
