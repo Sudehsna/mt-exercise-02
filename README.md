@@ -42,14 +42,14 @@ Generate (sample) some text from a trained model with:
     ./scripts/generate.sh
 
 
-**Task 1**:
+# Task 1:
 
 We first modified the download_data.sh by renaming the URL and renamed all the files/folders to match our dataset.
 We then proceeded to change the relevant paths to "moby" (our folder) and the epoch number in train.sh. While running we encountered a pickling error and changed the main.py and generate.py to inlcude the parameter weights_only=False for model = torch.load(...):
 
     ./scripts/download_data.sh
 
-**Task 2**:
+# Task 2:
  
 Additional Flags:
 The dropout setting we used are 0.0, 0.3, 0.5, 0.7, 0.9, which each need to be manually adapted during training.
