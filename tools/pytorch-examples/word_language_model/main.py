@@ -238,6 +238,11 @@ if args.log_test:
         writer = csv.writer(f, delimiter='\t')
         writer.writerow(["dropout", "ppl"])
 
+if args.log_valid:
+    with open(args.log_valid, 'a') as f:
+        writer = csv.writer(f, delimiter='\t')
+        writer.writerow(["epoch", "dropout", "ppl"])
+
 # Loop over epochs.
 lr = args.lr
 best_val_loss = None
@@ -253,6 +258,12 @@ try:
                 'valid ppl {:8.2f}'.format(epoch, (time.time() - epoch_start_time),
                                            val_loss, math.exp(val_loss)))
         print('-' * 89)
+        # Write to log file
+        if args.log_valid:
+            with open(args.log_valid, 'a') as f:
+                writer = csv.writer(f, delimiter='\t')
+                writer.writerow([epoch, args.dropout, math.exp(val_loss)])
+                
         # Save the model if the validation loss is the best we've seen so far.
         if not best_val_loss or val_loss < best_val_loss:
             with open(args.save, 'wb') as f:
