@@ -20,9 +20,9 @@ SECONDS=0
         --log-interval 100 \
         --emsize 200 --nhid 200 --dropout 0.5 --tied \
         --save $models/model.pt #\
-        # --log-epoch $data/logs/epoch-0.9-ppl.tsv \
-        # --log-test $data/logs/test-0.9-ppl.tsv \
-        # --log-valid $data/logs/valid-0.9-ppl.tsv
+        --log-epoch $data/logs/epoch-0.9-ppl.tsv \
+        --log-test $data/logs/test-0.9-ppl.tsv \
+        --log-valid $data/logs/valid-0.9-ppl.tsv
 )
 
 echo "time taken:"

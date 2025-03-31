@@ -41,9 +41,40 @@ Generate (sample) some text from a trained model with:
 
     ./scripts/generate.sh
 
-**Note task 1**:
-We used Nathan the Wise as new dataset for training the model.
-We modified download_data.sh by changing the url, the names and the path of the files.
-First tried using Nathan The Wise and perplexity stayed high for the last 10+ epochs. Which means the hyperparamters were not optimal and or the text was not suitable for this kind of model training (i.e. too short). There might also have been some issues with formatting the text. To combat the potentiall limiation of the text length we tried Moby Dicks The Whale to bypass the shortness of Nathan The Wise. But even here we see that the perplexity has not significantly decreased in the last something epochs which lead us to blieve that it indeed is the hyperparameter setting which causes these issues. Both text produced gibberish text samples but we can clearly see that it has been trained on the specified text since we see words like "Whale" appearing which seem very specific to the text. 
-**Notes task 2**:
 
+**Task 1**:
+
+We first modified the download_data.sh by renaming the URL and renamed all the files/folders to match our dataset.
+We then proceeded to change the relevant paths to "moby" (our folder) and the epoch number in train.sh. While running we encountered a pickling error and changed the main.py and generate.py to inlcude the parameter weights_only=False for model = torch.load(...):
+
+    ./scripts/download_data.sh
+
+**Task 2**:
+ 
+Additional Flags:
+The dropout setting we used are 0.0, 0.3, 0.5, 0.7, 0.9, which each need to be manually adapted during training.
+In the main.py we added three additional flags --log-valid, --log-test and --log-epoch in train.sh to run the training with logging. We ran this script for each dropout setting to get the log-files:
+
+    ./scripts/train.sh
+
+The files will be stored in the new folder "logs" under the folder "data".
+Since we have seperate .tsv files for each dropout setting and each perplexity we wrote a script (perplexity_table.py) that would concatenate the dropouts, epoch and perplexities depending on the type of perplexity (test, valid and epoch):
+
+    python3 ./scripts/perplexity_table.py
+
+To create the table and line chart we execute create_table.py and line_chart_plot.py which then stored in the folder tables_charts.
+
+    python3 ./scripts/create_table.py
+    python3 ./scripts/line_chart_plot.py
+
+Finally, we generated two samples for the highest and lowest perplexity:
+
+    ./scripts/generate.sh
+
+Comment out the log-flags in train.sh to not append more data to the logging charts.  
+
+
+
+
+
+(Hint: Name all the files the same as ours for the code to work without major changes :))
